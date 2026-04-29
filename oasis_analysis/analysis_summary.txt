@@ -1,0 +1,61 @@
+
+================================================================================
+OASIS-2 LONGITUDINAL DATASET ANALYSIS SUMMARY
+================================================================================
+
+DATASET DESCRIPTION
+-------------------
+The OASIS-2 (Open Access Series of Imaging Studies) longitudinal dataset
+contains MRI brain scans from 150 subjects with multiple visits
+tracking dementia progression over time.
+
+KEY VARIABLES ANALYZED
+----------------------
+- MMSE (Mini-Mental State Examination): Cognitive function score (0-30)
+- CDR (Clinical Dementia Rating): Dementia severity (0, 0.5, 1, 2)
+- nWBV (Normalized Whole Brain Volume): Brain atrophy measure
+- Group: Nondemented, Demented, Converted
+
+SAMPLE STATISTICS
+-----------------
+Total observations: 458
+Unique subjects: 150
+Visits per subject: 3.1 (average)
+
+Group Distribution:
+Group
+Nondemented    234
+Demented       135
+Converted       89
+
+KEY FINDINGS
+------------
+1. MMSE scores show clear progression patterns:
+   - Nondemented: Stable (~28.5)
+   - Demented: Declining (~22 ¡ú lower with visits)
+   - Converted: Initial stability, then decline after conversion
+
+2. Brain volume (nWBV) correlates with diagnosis:
+   - Higher volume associated with nondemented
+   - Progressive volume loss in demented patients
+
+3. CDR scores align with clinical diagnoses:
+   - Nondemented: Predominantly CDR = 0
+   - Demented: CDR typically 1.0 or higher
+   - Converted: Shows transition from 0 to higher CDR
+
+COMPARISON WITH CURRENT PROJECT
+--------------------------------
+The current Alzheimer's risk prediction demo uses a cross-sectional
+Kaggle-style dataset with questionnaire-based features.
+
+OASIS-2 provides complementary longitudinal MRI data that could support:
+- Future tracking/monitoring features
+- Brain volume progression analysis
+- Multi-visit trend visualization
+- Clinical progression modeling
+
+Note: OASIS-2 subjects have confirmed clinical diagnoses, while our
+prediction model assesses risk in asymptomatic/early-symptomatic individuals.
+
+================================================================================
