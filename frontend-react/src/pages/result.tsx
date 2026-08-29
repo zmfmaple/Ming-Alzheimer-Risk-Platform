@@ -971,7 +971,7 @@ export default function Result() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-8">
               <div className="glass-card p-6">
                 <h2 className="font-display mb-2 text-xl font-bold text-warm-wood">
-                  {isZh ? 'AI 报告助手' : 'AI Report Assistant'}
+                  {isZh ? '报告助手' : 'Report Assistant'}
                 </h2>
                 <p className="mb-4 text-sm text-warm-wood-light">
                   {isZh

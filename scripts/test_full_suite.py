@@ -91,7 +91,7 @@ def test_predict_authenticated(token):
         return False
 
 def test_chat_explanation(token):
-    print("\n=== TEST 5: /chat (AI解释) ===")
+    print("\n=== TEST 5: /chat (report explanation) ===")
     url = f'{BASE_URL}/chat'
     payload = {'message': '为什么我的风险概率是0.7？', 'result': {'risk_level': '中风险', 'risk_probability': 0.7, 'top_explanations': []}, 'formData': {}}
     r = requests.post(url, json=payload, timeout=30)
