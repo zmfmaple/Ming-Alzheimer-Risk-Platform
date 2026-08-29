@@ -16,9 +16,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+from pathlib import Path
 
 # Output directory
-OUTPUT_DIR = "oasis_analysis"
+OUTPUT_DIR = Path(__file__).resolve().parent
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def generate_oasis2_sample_data():

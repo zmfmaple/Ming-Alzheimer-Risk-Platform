@@ -1,5 +1,8 @@
 # OASIS-2 Longitudinal Dataset Integration Analysis
 
+This supplementary analysis lives under `research/oasis2/` and is not part of the
+deployed questionnaire prediction pipeline.
+
 ## 1. Inspection of OASIS-2 Dataset
 
 ### Overview

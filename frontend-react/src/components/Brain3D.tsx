@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Float, MeshDistortMaterial, Sphere } from '@react-three/drei'
 import * as THREE from 'three'
@@ -57,6 +57,7 @@ function BrainModel() {
 
 function Particles() {
   const particlesRef = useRef<THREE.Points>(null)
+  const particleCount = 100
 
   useFrame((state) => {
     if (particlesRef.current) {
@@ -64,18 +65,26 @@ function Particles() {
     }
   })
 
-  const particleCount = 100
-  const positions = new Float32Array(particleCount * 3)
+  const positions = useMemo(() => {
+    const generatedPositions = new Float32Array(particleCount * 3)
+    const stableUnit = (seed: number) => {
+      const value = Math.sin(seed) * 43758.5453
+      return value - Math.floor(value)
+    }
 
-  for (let i = 0; i < particleCount * 3; i += 3) {
-    const radius = 3 + Math.random() * 2
-    const theta = Math.random() * Math.PI * 2
-    const phi = Math.random() * Math.PI
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      const seed = i / 3 + 1
+      const radius = 3 + stableUnit(seed * 12.9898) * 2
+      const theta = stableUnit(seed * 78.233) * Math.PI * 2
+      const phi = stableUnit(seed * 39.425) * Math.PI
 
-    positions[i] = radius * Math.sin(phi) * Math.cos(theta)
-    positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta)
-    positions[i + 2] = radius * Math.cos(phi)
-  }
+      generatedPositions[i] = radius * Math.sin(phi) * Math.cos(theta)
+      generatedPositions[i + 1] = radius * Math.sin(phi) * Math.sin(theta)
+      generatedPositions[i + 2] = radius * Math.cos(phi)
+    }
+
+    return generatedPositions
+  }, [])
 
   return (
     <points ref={particlesRef}>

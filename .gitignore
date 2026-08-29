@@ -11,7 +11,9 @@ env/
 
 # Node / Next.js
 node_modules/
+.pnpm-store/
 .next/
+.next-brain/
 out/
 dist/
 build/
@@ -20,6 +22,11 @@ build/
 .env
 .env.*
 !.env.example
+*.db
+*.log
+output/
+frontend-react/AGENTS.md
+frontend-react/CLAUDE.md
 
 # OS / editor
 .DS_Store
@@ -29,3 +36,11 @@ Thumbs.db
 
 # Local accidental nested repository
 Ming-Alzheimer-Risk-Platform/
+
+# Restricted HCAP source data must stay outside the repository
+research/hcap/data/
+research/hcap/results/*
+!research/hcap/results/.gitkeep
+
+# Controlled-access or sensitive research artifacts
+models/nacc_public_questionnaire_selected_model.pkl

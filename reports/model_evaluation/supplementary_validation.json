@@ -1,0 +1,56 @@
+{
+  "strategy": "dual_dataset",
+  "summary": "Kaggle/prototype data remain the deployed questionnaire model for the main Alzheimer-class probability. NACC public-questionnaire longitudinal analysis is integrated as a supplementary backend evidence source. The website reports the two outputs separately and does not fuse them into a single clinical probability; external clinical validation remains incomplete.",
+  "routes": [
+    {
+      "route_id": "kaggle_prototype",
+      "label": "Kaggle prototype model",
+      "role": "deployed_prototype_baseline",
+      "deployed": true,
+      "dataset": "Kaggle-style Alzheimer questionnaire dataset",
+      "target": "Current diagnosis class membership",
+      "feature_count": 32,
+      "model": "XGBoost",
+      "roc_auc": 0.94,
+      "pr_auc": 0.933,
+      "brier": 0.054,
+      "probability_definition": "Internally calibrated probability of membership in the dataset's Alzheimer diagnosis class conditional on the submitted questionnaire.",
+      "interpretation_limit": "Prototype class-estimation route; not a clinical diagnosis or future-onset forecast."
+    },
+    {
+      "route_id": "nacc_public_questionnaire",
+      "label": "NACC public-questionnaire backend evidence",
+      "role": "supplementary_longitudinal_evidence",
+      "deployed": true,
+      "dataset": "NACC longitudinal public-questionnaire feature set",
+      "target": "Later dementia conversion from baseline information",
+      "feature_count": 23,
+      "model": "XGBoost with Platt calibration",
+      "roc_auc": 0.821,
+      "roc_auc_ci": [
+        0.807,
+        0.834
+      ],
+      "pr_auc": 0.526,
+      "brier": 0.118,
+      "sensitivity": 0.661,
+      "specificity": 0.822,
+      "excluded_fields": [
+        "CDRGlobal",
+        "CDRSum",
+        "MMSE",
+        "MoCA"
+      ],
+      "top_treeshap_features": [
+        "MemoryComplaints",
+        "Age",
+        "FunctionalAssessment",
+        "ADL",
+        "BMI",
+        "FamilyHistoryAlzheimers"
+      ],
+      "probability_definition": "Platt-calibrated probability that the user's input pattern resembles NACC baseline participants who later converted to dementia.",
+      "interpretation_limit": "Integrated as supplementary backend evidence; not fused with the Kaggle score, not externally validated and not a clinical forecast."
+    }
+  ]
+}

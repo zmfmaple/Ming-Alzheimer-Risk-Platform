@@ -1,0 +1,13 @@
+{
+  "rows": 2149,
+  "columns": 35,
+  "duplicate_patient_ids": 0,
+  "missing_cells": 0,
+  "constant_columns": [
+    "DoctorInCharge"
+  ],
+  "class_counts": {
+    "0": 1389,
+    "1": 760
+  }
+}

@@ -1,43 +1,82 @@
-import { ReactNode } from 'react'
+"use client"
+
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { CONSENT_STORAGE_KEY } from '@/lib/consent'
+import LanguageSelector from '@/components/LanguageSelector'
+import { useLanguage } from '@/lib/i18n'
+import { API_BASE } from '@/lib/api'
 
 interface LayoutProps {
   children: ReactNode
 }
 
-const navItems = [
-  { name: 'Overview', href: '/' },
-  { name: 'Assessment', href: '/assessment' },
-  { name: 'Archive', href: '/archive' },
-  { name: 'Monitoring', href: '/monitoring' },
-]
-
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname()
+  const router = useRouter()
+  const { t } = useLanguage()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [username, setUsername] = useState('')
+  const [showDropdown, setShowDropdown] = useState(false)
+
+  const navItems = [
+    { name: t('overview'), href: '/' },
+    { name: t('assessment'), href: '/assessment' },
+    { name: t('records'), href: '/archive' },
+    { name: t('modelProgress'), href: '/model-progress' },
+    { name: t('methodology'), href: '/methodology' },
+  ]
+
+  const fetchUserInfo = useCallback(async (token: string) => {
+    try {
+      const response = await fetch(`${API_BASE}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        setUsername(data.username)
+      }
+    } catch (error) {
+      console.error('Unable to load user information', error)
+    }
+  }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    setIsLoggedIn(!!token)
+    if (token) fetchUserInfo(token)
+  }, [fetchUserInfo])
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user_id')
+    localStorage.removeItem(CONSENT_STORAGE_KEY)
+    setIsLoggedIn(false)
+    setUsername('')
+    setShowDropdown(false)
+    router.push('/')
+  }
 
   return (
     <div className="min-h-screen bg-almond">
-      {/* Glassmorphism Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+      <nav className="fixed left-0 right-0 top-0 z-50 glass-nav">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+          <div className="flex items-center justify-between gap-3">
+            <Link href="/" className="flex shrink-0 items-center gap-2">
               <span className="font-display text-2xl font-bold text-warm-wood">
                 BrainEcho
               </span>
             </Link>
 
-            {/* Navigation Links */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden items-center gap-5 md:flex lg:gap-8">
               {navItems.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
-                  className={`nav-link text-warm-wood font-medium transition-colors ${
-                    pathname === item.href ? 'text-sage-dark font-semibold' : ''
+                  className={`nav-link relative whitespace-nowrap font-medium text-warm-wood transition-colors ${
+                    pathname === item.href ? 'font-semibold text-sage-dark' : ''
                   }`}
                 >
                   {item.name}
@@ -52,22 +91,77 @@ export default function Layout({ children }: LayoutProps) {
               ))}
             </div>
 
-            {/* Right side - User icon */}
-            <div className="flex items-center gap-4">
-              <button className="w-10 h-10 rounded-full bg-white/50 flex items-center justify-center hover:bg-white/70 transition-colors">
-                <svg className="w-5 h-5 text-warm-wood" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </button>
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+              <LanguageSelector />
+              {isLoggedIn ? (
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setShowDropdown((open) => !open)}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-sage/20 font-semibold text-warm-wood transition-colors hover:bg-sage/30"
+                    aria-label={username}
+                    aria-haspopup="menu"
+                    aria-expanded={showDropdown}
+                  >
+                    {username.charAt(0).toUpperCase()}
+                  </button>
+
+                  {showDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="absolute right-0 mt-2 w-52 overflow-hidden border border-white bg-white/95 shadow-lg backdrop-blur-xl"
+                      role="menu"
+                    >
+                      <div className="border-b border-almond-light p-4">
+                        <p className="text-sm text-warm-wood-light">
+                          {t('signedInAs')}
+                        </p>
+                        <p className="break-words font-semibold text-warm-wood">
+                          {username}
+                        </p>
+                      </div>
+                      <Link
+                        href="/privacy"
+                        onClick={() => setShowDropdown(false)}
+                        className="block w-full px-4 py-3 text-left font-medium text-warm-wood transition-colors hover:bg-almond-light"
+                        role="menuitem"
+                      >
+                        {t('dataPrivacy')}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="w-full px-4 py-3 text-left font-medium text-warm-wood transition-colors hover:bg-almond-light"
+                        role="menuitem"
+                      >
+                        {t('logout')}
+                      </button>
+                    </motion.div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="hidden whitespace-nowrap px-2 py-2 font-medium text-warm-wood transition-colors hover:text-sage sm:block"
+                  >
+                    {t('login')}
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="hidden whitespace-nowrap rounded-lg bg-sage px-3 py-2 font-medium text-white transition-colors hover:bg-sage/90 sm:block"
+                  >
+                    {t('register')}
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="pt-20">
-        {children}
-      </main>
+      <main className="pt-20">{children}</main>
     </div>
   )
 }

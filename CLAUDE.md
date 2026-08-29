@@ -1,52 +1,43 @@
-# Alzheimer Risk Prediction Platform
+# BrainEcho Project Guide
 
-## Project Overview
+## Active Application
 
-A web-based platform for predicting Alzheimer's disease risk using machine learning.
+- `frontend-react/`: Next.js user interface.
+- `backend/`: FastAPI API, authentication, persistence, prediction, and model training.
+- `models/`: deployed model artifacts.
+- `data/raw/`: source training data.
+- `data/runtime/`: local SQLite runtime data; never commit database files.
 
-## Tech Stack
+There is one active application stack: `frontend-react/` and `backend/`.
 
-- **Backend**: FastAPI (Python 3.10+)
-- **Frontend**: Streamlit
-- **ML Libraries**: scikit-learn, XGBoost, SHAP
-- **Data Processing**: pandas, matplotlib
-- **PDF Reports**: reportlab
+## Commands
 
-## Project Structure
+Run commands from the project root unless a command changes directory explicitly.
 
-```
-Alzheimer-Risk-Platform/
-├── CLAUDE.md
-├── requirements.txt
-├── data/
-│   └── alzheimers_disease_data.csv
-├── backend/
-│   └── main.py
-└── frontend/
-    └── app.py
+```powershell
+cd backend
+python -m uvicorn main:app --reload
+cd ..\frontend-react
+npm run dev
 ```
 
-## Data Features
+The frontend uses `NEXT_PUBLIC_API_BASE_URL` when set and otherwise calls
+`http://localhost:8000`.
 
-### Demographics
-- Age, Gender, Ethnicity, EducationLevel
+## Boundaries
 
-### Lifestyle
-- BMI, Smoking, AlcoholConsumption, PhysicalActivity, DietQuality, SleepQuality
+- Keep the 32 deployed model features synchronized between
+  `backend/model_config.py`, `backend/schemas.py`, and the frontend assessment payload.
+- Prediction and SHAP explanation must use the same transformed feature frame.
+- Missing values must use training-split imputation values from
+  `models/model_metadata.json`.
+- Present output as conditional dataset-class membership, not diagnosis or future
+  disease-onset prediction.
+- HCAP and OASIS-2 are supplementary research analyses and must not be merged into the
+  deployed questionnaire model without an explicit methodology change.
 
-### Medical History
-- FamilyHistoryAlzheimers, CardiovascularDisease, Diabetes, Depression, HeadInjury, Hypertension
+## Documentation
 
-### Physiological
-- Blood Pressure (SystolicBP, DiastolicBP)
-- Cholesterol (Total, LDL, HDL, Triglycerides)
-
-### Cognitive Assessment
-- **MMSE** (Mini-Mental State Examination): Primary cognitive score (0-30)
-- FunctionalAssessment, MemoryComplaints, BehavioralProblems, ADL
-
-### Symptoms
-- Confusion, Disorientation, PersonalityChanges, DifficultyCompletingTasks, Forgetfulness
-
-### Target
-- Diagnosis (0/1)
+- `README.md`: setup and project map.
+- `docs/ARCHITECTURE.md`: components, data flow, API, and persistence.
+- `docs/DEVELOPMENT.md`: common development and verification commands.

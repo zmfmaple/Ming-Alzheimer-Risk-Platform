@@ -1,0 +1,326 @@
+{
+  "trained_at_utc": "2026-06-07T13:08:17.238926+00:00",
+  "model_name": "XGBoost",
+  "selection_metric": "five_fold_cv_f1_on_training_split",
+  "feature_set": "full_questionnaire",
+  "feature_count": 32,
+  "training_rows": 1719,
+  "holdout_rows": 430,
+  "diagnosis_proximal_features": [
+    "MMSE",
+    "FunctionalAssessment",
+    "MemoryComplaints",
+    "BehavioralProblems",
+    "ADL",
+    "Confusion",
+    "Disorientation",
+    "PersonalityChanges",
+    "DifficultyCompletingTasks",
+    "Forgetfulness"
+  ],
+  "probability_definition": "Internally calibrated probability of membership in the dataset's Alzheimer diagnosis class conditional on the submitted questionnaire.",
+  "probability_calibration": {
+    "method": "Platt scaling on an internal calibration split",
+    "fit_rows": 1289,
+    "calibration_rows": 430,
+    "holdout_brier_calibrated": 0.05444156819723119,
+    "holdout_roc_auc_calibrated": 0.939677205603938,
+    "holdout_pr_auc_calibrated": 0.9327580177002945,
+    "holdout_roc_auc_95ci": [
+      0.906962119018102,
+      0.969280929801498
+    ],
+    "holdout_brier_95ci": [
+      0.03661818992593519,
+      0.07196478479364904
+    ],
+    "holdout_sensitivity_at_upper_threshold": 0.9276315789473685,
+    "holdout_specificity_at_upper_threshold": 0.9460431654676259,
+    "calibrator_intercept": 0.3914310784907883,
+    "calibrator_slope": 1.093178673882532
+  },
+  "risk_thresholds": {
+    "lower": 0.03,
+    "upper": 0.3612,
+    "method": "Internal calibration split: lower boundary targets at least 90% sensitivity; upper boundary targets at least 90% specificity."
+  },
+  "feature_reference_ranges": {
+    "Age": {
+      "q25": 67.0,
+      "q50": 75.0,
+      "q75": 83.0
+    },
+    "BMI": {
+      "q25": 21.623688885532914,
+      "q50": 27.91208154602863,
+      "q75": 33.85490306715742
+    },
+    "AlcoholConsumption": {
+      "q25": 5.198830246090543,
+      "q50": 9.995191575291775,
+      "q75": 15.255740874759669
+    },
+    "PhysicalActivity": {
+      "q25": 2.5762880498533223,
+      "q50": 4.733116166541633,
+      "q75": 7.393688012712413
+    },
+    "DietQuality": {
+      "q25": 2.491900598466519,
+      "q50": 5.1604312548505575,
+      "q75": 7.578672999681272
+    },
+    "SleepQuality": {
+      "q25": 5.472445439223737,
+      "q50": 7.117036254731822,
+      "q75": 8.563230343443296
+    },
+    "SystolicBP": {
+      "q25": 111.5,
+      "q50": 133.0,
+      "q75": 156.5
+    },
+    "DiastolicBP": {
+      "q25": 75.0,
+      "q50": 91.0,
+      "q75": 105.0
+    },
+    "CholesterolTotal": {
+      "q25": 190.27036803185572,
+      "q50": 225.23494322711883,
+      "q75": 262.5931357614738
+    },
+    "CholesterolLDL": {
+      "q25": 87.66790878725025,
+      "q50": 123.43073889392112,
+      "q75": 162.12835295801517
+    },
+    "CholesterolHDL": {
+      "q25": 38.45455470750851,
+      "q50": 58.90731359105082,
+      "q75": 78.91618295458287
+    },
+    "CholesterolTriglycerides": {
+      "q25": 138.8844959464539,
+      "q50": 231.3947582339809,
+      "q75": 315.9753181080961
+    },
+    "MMSE": {
+      "q25": 7.163690037220244,
+      "q50": 14.431449144643857,
+      "q75": 22.149551796900298
+    },
+    "FunctionalAssessment": {
+      "q25": 2.5534402221139683,
+      "q50": 5.173890959228204,
+      "q75": 7.647479801605419
+    },
+    "ADL": {
+      "q25": 2.2828779297964976,
+      "q50": 5.026306086980924,
+      "q75": 7.604332883668073
+    }
+  },
+  "data_audit": {
+    "rows": 2149,
+    "columns": 35,
+    "duplicate_patient_ids": 0,
+    "missing_cells": 0,
+    "constant_columns": [
+      "DoctorInCharge"
+    ],
+    "class_counts": {
+      "0": 1389,
+      "1": 760
+    }
+  },
+  "selected_metrics": {
+    "cv_accuracy_mean": 0.9540426469591159,
+    "cv_accuracy_std": 0.006732698675006006,
+    "cv_balanced_accuracy_mean": 0.9454479114236655,
+    "cv_precision_mean": 0.9527391535211021,
+    "cv_recall_mean": 0.9161089283294948,
+    "cv_f1_mean": 0.9338044516514914,
+    "cv_f1_std": 0.009451344705004546,
+    "cv_roc_auc_mean": 0.95584293097609,
+    "holdout_accuracy": 0.9488372093023256,
+    "holdout_balanced_accuracy": 0.9395588792124195,
+    "holdout_precision": 0.9452054794520548,
+    "holdout_recall": 0.9078947368421053,
+    "holdout_specificity": 0.9712230215827338,
+    "holdout_f1": 0.9261744966442953,
+    "holdout_roc_auc": 0.9448125709958349,
+    "holdout_pr_auc": 0.938300593518372,
+    "holdout_brier": 0.049911145120859146
+  },
+  "imputation": {
+    "fit_scope": "training_split_only",
+    "numerical_strategy": "median",
+    "categorical_strategy": "mode",
+    "values": {
+      "Age": 75.0,
+      "BMI": 27.91208154602863,
+      "AlcoholConsumption": 9.995191575291775,
+      "PhysicalActivity": 4.733116166541633,
+      "DietQuality": 5.1604312548505575,
+      "SleepQuality": 7.117036254731822,
+      "SystolicBP": 133.0,
+      "DiastolicBP": 91.0,
+      "CholesterolTotal": 225.23494322711883,
+      "CholesterolLDL": 123.43073889392112,
+      "CholesterolHDL": 58.90731359105082,
+      "CholesterolTriglycerides": 231.3947582339809,
+      "MMSE": 14.431449144643857,
+      "FunctionalAssessment": 5.173890959228204,
+      "ADL": 5.026306086980924,
+      "Gender": 1,
+      "Ethnicity": 0,
+      "EducationLevel": 1,
+      "Smoking": 0,
+      "FamilyHistoryAlzheimers": 0,
+      "CardiovascularDisease": 0,
+      "Diabetes": 0,
+      "Depression": 0,
+      "HeadInjury": 0,
+      "Hypertension": 0,
+      "MemoryComplaints": 0,
+      "BehavioralProblems": 0,
+      "Confusion": 0,
+      "Disorientation": 0,
+      "PersonalityChanges": 0,
+      "DifficultyCompletingTasks": 0,
+      "Forgetfulness": 0
+    }
+  },
+  "feature_bounds": {
+    "Gender": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Ethnicity": {
+      "min": 0.0,
+      "max": 3.0
+    },
+    "EducationLevel": {
+      "min": 0.0,
+      "max": 3.0
+    },
+    "Smoking": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "FamilyHistoryAlzheimers": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "CardiovascularDisease": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Diabetes": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Depression": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "HeadInjury": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Hypertension": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "MemoryComplaints": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "BehavioralProblems": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Confusion": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Disorientation": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "PersonalityChanges": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "DifficultyCompletingTasks": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Forgetfulness": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Age": {
+      "min": 60.0,
+      "max": 90.0
+    },
+    "BMI": {
+      "min": 15.00885118163106,
+      "max": 39.98851282501771
+    },
+    "AlcoholConsumption": {
+      "min": 0.0020030991362718,
+      "max": 19.98929335906197
+    },
+    "PhysicalActivity": {
+      "min": 0.003616016826019,
+      "max": 9.987429413422252
+    },
+    "DietQuality": {
+      "min": 0.00938472011623,
+      "max": 9.99834567881401
+    },
+    "SleepQuality": {
+      "min": 4.002628659826611,
+      "max": 9.99984031668144
+    },
+    "SystolicBP": {
+      "min": 90.0,
+      "max": 179.0
+    },
+    "DiastolicBP": {
+      "min": 60.0,
+      "max": 119.0
+    },
+    "CholesterolTotal": {
+      "min": 150.09331559406317,
+      "max": 299.9599913852104
+    },
+    "CholesterolLDL": {
+      "min": 50.23070655980742,
+      "max": 199.96566510142804
+    },
+    "CholesterolHDL": {
+      "min": 20.00343401498445,
+      "max": 99.98032407804152
+    },
+    "CholesterolTriglycerides": {
+      "min": 50.40719361978579,
+      "max": 399.8543216616483
+    },
+    "MMSE": {
+      "min": 0.0053121464417005,
+      "max": 29.991380560529063
+    },
+    "FunctionalAssessment": {
+      "min": 0.000459593595804,
+      "max": 9.99260957926868
+    },
+    "ADL": {
+      "min": 0.0012879277024868,
+      "max": 9.99974712180168
+    }
+  },
+  "random_state": 42
+}

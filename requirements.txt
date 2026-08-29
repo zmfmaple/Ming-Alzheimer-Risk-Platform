@@ -4,8 +4,8 @@ pandas
 scikit-learn
 xgboost
 shap
-streamlit
-reportlab
 matplotlib
-plotly
 requests
+sqlalchemy
+passlib[argon2]
+python-jose[cryptography]

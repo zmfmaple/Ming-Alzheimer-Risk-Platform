@@ -1,0 +1,39 @@
+{
+  "target": "target_future_dementia",
+  "selected_feature_set": "public_questionnaire_no_formal_tests",
+  "selected_model": "XGBoost",
+  "excluded_formal_clinical_fields": [
+    "CDRGlobal",
+    "CDRSum",
+    "MMSE",
+    "MoCA"
+  ],
+  "selected_metrics": {
+    "threshold": 0.25,
+    "accuracy": 0.7912876137158852,
+    "balanced_accuracy": 0.7414578244605743,
+    "precision": 0.46696891191709844,
+    "recall_sensitivity": 0.6608615948670944,
+    "specificity": 0.8220540540540541,
+    "f1": 0.5472485768500949,
+    "roc_auc": 0.8214297817524215,
+    "pr_auc": 0.5259095851425855,
+    "brier": 0.11840960517346834,
+    "true_negative": 3802,
+    "false_positive": 823,
+    "false_negative": 370,
+    "true_positive": 721,
+    "feature_set": "public_questionnaire_no_formal_tests",
+    "model": "XGBoost",
+    "feature_count": 23,
+    "train_rows": 22860,
+    "test_rows": 5716,
+    "train_positive_rate": 0.19094488188976377,
+    "test_positive_rate": 0.19086773967809656,
+    "roc_auc_ci_low": 0.8074602301258641,
+    "roc_auc_ci_high": 0.834423974197121,
+    "calibrator_intercept": 0.044614920394424606,
+    "calibrator_slope": 1.020691989042575
+  },
+  "interpretation": "Most realistic candidate for supplementary longitudinal validation and a possible future version-2 website model; internally it performs close to the CDR-enhanced NACC model while excluding CDR, MMSE and MoCA. It is not the currently deployed Kaggle prototype model."
+}

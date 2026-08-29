@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "dataset_rows": 2149,
+  "training_rows": 1719,
+  "model_feature_count": 32,
+  "target": "Diagnosis",
+  "excluded_identifier_columns": [
+    "PatientID",
+    "DoctorInCharge"
+  ],
+  "imputation_fit_scope": "training_split_only",
+  "missing_imputation_values": []
+}

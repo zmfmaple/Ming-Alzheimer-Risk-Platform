@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  distDir: '.next-brain',
+  allowedDevOrigins: ['127.0.0.1'],
   images: {
-    domains: ['sketchfab.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'sketchfab.com',
+      },
+    ],
   },
 }
 

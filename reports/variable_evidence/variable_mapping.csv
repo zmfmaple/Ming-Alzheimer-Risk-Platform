@@ -1,0 +1,33 @@
+field,category,status,main_measurement_issue
+Age,Demographics,Direct,Restricted to the source range of 60-90 years
+Gender,Demographics,Direct,Binary source coding excludes other gender categories
+Ethnicity,Demographics,Direct,Broad source categories
+EducationLevel,Demographics,Direct,Four coarse attainment categories
+BMI,Lifestyle,Converted,Height and weight may be self-reported
+Smoking,Lifestyle,Direct,No duration or former-smoking history
+AlcoholConsumption,Lifestyle,Converted,Source unit equivalence to UK units is unverified
+PhysicalActivity,Lifestyle,Converted,BrainEcho applies vigorous-intensity weighting
+DietQuality,Lifestyle,Project-derived,Original scoring instrument unavailable
+SleepQuality,Lifestyle,Project-derived,Original scoring instrument unavailable
+FamilyHistoryAlzheimers,Medical history,Direct,Relationship and diagnostic certainty not captured
+CardiovascularDisease,Medical history,Direct,Disease subtype and severity not captured
+Diabetes,Medical history,Direct,Type duration and control not captured
+Depression,Medical history,Direct,Current state and treatment not captured
+HeadInjury,Medical history,Direct,Timing and severity not captured
+Hypertension,Medical history,Direct,Treatment and duration not captured
+SystolicBP,Clinical measurements,Direct,Single self-reported measurement
+DiastolicBP,Clinical measurements,Direct,Single self-reported measurement
+CholesterolTotal,Clinical measurements,Converted,Test date and fasting status may differ
+CholesterolLDL,Clinical measurements,Converted,Laboratory method not captured
+CholesterolHDL,Clinical measurements,Converted,Laboratory method not captured
+CholesterolTriglycerides,Clinical measurements,Converted,Fasting status affects values
+MMSE,Cognition and function,Formal result,Interpretation depends on context and administration
+FunctionalAssessment,Cognition and function,Project-derived,Source instrument unavailable
+MemoryComplaints,Cognition and function,Direct,Self-report bias
+BehavioralProblems,Cognition and function,Direct,No validated symptom scale supplied
+ADL,Cognition and function,Project-derived,Not a licensed Katz ADL score
+Confusion,Symptoms,Direct,Not specific to Alzheimer disease
+Disorientation,Symptoms,Direct,Onset and context not represented
+PersonalityChanges,Symptoms,Direct,Subjective and non-specific
+DifficultyCompletingTasks,Symptoms,Direct,Alternative physical causes not separated
+Forgetfulness,Symptoms,Direct,Duration and severity not captured
